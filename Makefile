@@ -11,4 +11,8 @@ sequentialnumsfortesting.txt:
 #	# 4m1.249s
 #	for ((i=1;i<=10000000;i++)); do echo $$i; done >$@
 
+allsamelinefortesting.txt:
+	yes thisisastring | head 1000000 > $@
 
+#TODO: all unicode code points
+#TODO: all valid unicode code points
