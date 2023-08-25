@@ -4,7 +4,10 @@ all: sequentialnumsfortesting.txt \
 	allsamelinefortesting.txt \
 	wordlist-mit-10000.txt \
 	wordlist-mit-100000.txt \
-	obfuscateddatafortesting.txt
+	obfuscateddatafortesting.txt \
+	uniquefortesting.txt
+
+CPPFLAGS ?= -O3
 
 sequentialnumsfortesting.txt:
 #	# winner, 0.199s
@@ -26,6 +29,11 @@ wordlist-mit-10000.txt:
 
 wordlist-mit-100000.txt:
 	wget -O $@ https://www.mit.edu/~ecprice/wordlist.100000
+
+uniquefortesting.txt: makeuniquefortesting obfuscateddatafortesting.txt
+	./makeuniquefortesting
+
+makeuniquefortesting: makeuniquefortesting.cpp
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
