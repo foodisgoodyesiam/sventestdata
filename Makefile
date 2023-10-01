@@ -5,9 +5,21 @@ all: sequentialnumsfortesting.txt \
 	wordlist-mit-10000.txt \
 	wordlist-mit-100000.txt \
 	obfuscateddatafortesting.txt \
-	uniquefortesting.txt
+	uniquefortesting.txt \
+	allutf8fortesting.txt \
+	assignedutf8fortesting.txt
 
-CPPFLAGS ?= -O3
+os::=$(shell uname -o | tr '/' '_')
+
+CFLAGS ?= -O3
+
+ifeq ($(os),Darwin)
+	CFLAGS ::= $(CFLAGS) -I/usr/local/include -I/opt/homebrew/include
+	Lunistring ::= -lunistring -L/opt/homebrew/lib
+else
+	Lunistring ::= -lunistring
+endif
+LDFLAGS ::= $(LDFLAGS) $(Lunistring)
 
 sequentialnumsfortesting.txt:
 #	# winner, 0.199s
@@ -33,7 +45,12 @@ wordlist-mit-100000.txt:
 uniquefortesting.txt: makeuniquefortesting obfuscateddatafortesting.txt
 	./makeuniquefortesting
 
+allutf8fortesting.txt assignedutf8fortesting.txt: makeutf8fortesting
+	./makeutf8fortesting
+
 makeuniquefortesting: makeuniquefortesting.cpp
+
+makeutf8fortesting: makeutf8fortesting.c
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
