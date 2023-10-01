@@ -5,6 +5,7 @@
 #include <unictype.h>
 #include <errno.h>
 #include <string.h>
+#include <stdlib.h>
 
 static const char* programName;
 

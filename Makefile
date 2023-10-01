@@ -15,11 +15,9 @@ CFLAGS ?= -O3
 
 ifeq ($(os),Darwin)
 	CFLAGS ::= $(CFLAGS) -I/usr/local/include -I/opt/homebrew/include
-	Lunistring ::= -lunistring -L/opt/homebrew/lib
-else
-	Lunistring ::= -lunistring
+	LDFLAGS ::= $(LDFLAGS) -L/opt/homebrew/lib
 endif
-LDFLAGS ::= $(LDFLAGS) $(Lunistring)
+LDLIBS ::= -lunistring
 
 sequentialnumsfortesting.txt:
 #	# winner, 0.199s
