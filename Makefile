@@ -43,7 +43,7 @@ wordlist-mit-100000.txt:
 uniquefortesting.txt: makeuniquefortesting obfuscateddatafortesting.txt
 	./makeuniquefortesting
 
-allutf8fortesting.txt assignedutf8fortesting.txt: makeutf8fortesting
+allutf8fortesting.txt assignedutf8fortesting.txt allutf16fortesting.txt assignedutf16fortesting.txt: makeutf8fortesting
 	./makeutf8fortesting
 
 makeuniquefortesting: makeuniquefortesting.cpp
@@ -52,3 +52,5 @@ makeutf8fortesting: makeutf8fortesting.c
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
+
+#TODO: random or pseudo-random stream
