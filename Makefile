@@ -1,13 +1,23 @@
 SHELL::=/bin/bash
 
+allutffiles ::= all_utf8_fortesting.txt \
+	assigned_utf8_fortesting.txt \
+	all_utf16le_fortesting.txt \
+	assigned_utf16le_fortesting.txt \
+	all_utf16be_fortesting.txt \
+	assigned_utf16be_fortesting.txt \
+	all_utf32le_fortesting.txt \
+	all_utf32be_fortesting.txt \
+	assigned_utf32le_fortesting.txt \
+	assigned_utf32be_fotesting.txt
+
 all: sequentialnumsfortesting.txt \
 	allsamelinefortesting.txt \
 	wordlist-mit-10000.txt \
 	wordlist-mit-100000.txt \
 	obfuscateddatafortesting.txt \
 	uniquefortesting.txt \
-	allutf8fortesting.txt \
-	assignedutf8fortesting.txt
+	$(allutffiles)
 
 os::=$(shell uname -o | tr '/' '_')
 
@@ -43,7 +53,8 @@ wordlist-mit-100000.txt:
 uniquefortesting.txt: makeuniquefortesting obfuscateddatafortesting.txt
 	./makeuniquefortesting
 
-allutf8fortesting.txt assignedutf8fortesting.txt allutf16fortesting.txt assignedutf16fortesting.txt: makeutf8fortesting
+
+$(allutffiles): makeutf8fortesting
 	./makeutf8fortesting
 
 makeuniquefortesting: makeuniquefortesting.cpp
@@ -54,3 +65,4 @@ makeutf8fortesting: makeutf8fortesting.c
 #TODO: all valid unicode code points
 
 #TODO: random or pseudo-random stream
+
