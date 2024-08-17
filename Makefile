@@ -17,7 +17,8 @@ all: sequentialnumsfortesting.txt \
 	wordlist-mit-100000.txt \
 	obfuscateddatafortesting.txt \
 	uniquefortesting.txt \
-	$(allutffiles)
+	$(allutffiles) \
+	dirs_fortesting
 
 os::=$(shell uname -o | tr '/' '_')
 
@@ -60,6 +61,9 @@ $(allutffiles): makeutf8fortesting
 makeuniquefortesting: makeuniquefortesting.cpp
 
 makeutf8fortesting: makeutf8fortesting.c
+
+dirs_fortesting:
+	./make_dirs_for_isempty.sh
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
