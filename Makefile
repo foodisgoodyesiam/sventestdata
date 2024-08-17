@@ -18,7 +18,8 @@ all: sequentialnumsfortesting.txt \
 	obfuscateddatafortesting.txt \
 	uniquefortesting.txt \
 	$(allutffiles) \
-	dirs_fortesting
+	dirs_fortesting \
+	pipe_fortesting
 
 os::=$(shell uname -o | tr '/' '_')
 
@@ -64,6 +65,9 @@ makeutf8fortesting: makeutf8fortesting.c
 
 dirs_fortesting:
 	./make_dirs_for_isempty.sh
+
+pipe_fortesting:
+	mkfifo $@
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
