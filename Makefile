@@ -19,7 +19,8 @@ all: sequentialnumsfortesting.txt \
 	uniquefortesting.txt \
 	$(allutffiles) \
 	dirs_fortesting \
-	pipe_fortesting
+	pipe_fortesting \
+	weird_file_names_fortesting/weird_name_a.txt
 
 os::=$(shell uname -o | tr '/' '_')
 
@@ -41,7 +42,7 @@ sequentialnumsfortesting.txt:
 #	for ((i=1;i<=10000000;i++)); do echo $$i; done >$@
 
 obfuscateddatafortesting.txt:
-	7z x compressed.7z
+	7za x compressed.7z
 
 allsamelinefortesting.txt:
 	yes thisisastring | head -1000000 > $@
@@ -63,11 +64,19 @@ makeuniquefortesting: makeuniquefortesting.cpp
 
 makeutf8fortesting: makeutf8fortesting.c
 
+make_weird_file_namesfortesting: make_weird_file_namesfortesting.c
+
 dirs_fortesting:
 	./make_dirs_for_isempty.sh
 
 pipe_fortesting:
 	mkfifo $@
+
+weird_file_names_fortesting/weird_name_a.txt: make_weird_file_namesfortesting | weird_file_names_fortesting
+	./make_weird_file_namesfortesting
+
+weird_file_names_fortesting:
+	mkdir -p $@
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
