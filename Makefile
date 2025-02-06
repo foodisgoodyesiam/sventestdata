@@ -20,7 +20,10 @@ all: sequentialnumsfortesting.txt \
 	$(allutffiles) \
 	dirs_fortesting \
 	pipe_fortesting \
-	weird_file_names_fortesting/weird_name_a.txt
+	weird_file_names_fortesting/weird_name_a.txt \
+	nonsparse_fortesting.txt \
+	sparse_fortesting.txt \
+	emptyfortesting.txt
 
 os::=$(shell uname -o | tr '/' '_')
 
@@ -77,6 +80,14 @@ weird_file_names_fortesting/weird_name_a.txt: make_weird_file_namesfortesting | 
 
 weird_file_names_fortesting:
 	mkdir -p $@
+
+nonsparse_fortesting.txt:
+	./make_sparse.sh
+
+sparse_fortesting.txt: nonsparse_fortesting.txt
+
+emptyfortesting.txt:
+	touch $@
 
 #TODO: all unicode code points
 #TODO: all valid unicode code points
